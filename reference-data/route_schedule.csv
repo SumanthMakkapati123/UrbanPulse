@@ -1,0 +1,5 @@
+route_id,route_name,terminal,scheduled_arrival_time
+R101,Central Station - Tech Park,Tech Park,08:15:00
+R102,Airport - City Centre,City Centre,08:20:00
+R103,North Depot - University,University,08:25:00
+R104,Riverfront - Industrial Estate,Industrial Estate,08:30:00

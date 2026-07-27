@@ -1,0 +1,7 @@
+zone,zone_name,population,number_of_schools
+CENTRAL,Central Business District,615000,84
+NORTH,North Residential Zone,940000,132
+SOUTH,South Residential Zone,1080000,149
+EAST,East Industrial Corridor,720000,76
+WEST,West Mixed-Use Zone,845000,118
+

@@ -1,0 +1,13 @@
+{
+  "bus_id": "BUS-00003",
+  "lat": 12.92147,
+  "lon": 77.564816,
+  "occupancy_pct": 35.0,
+  "route_id": "R104",
+  "route_name": "Riverfront - Industrial Estate",
+  "schedule_match": true,
+  "scheduled_arrival_time": "08:30:00",
+  "speed_kmh": 12.4,
+  "terminal": "Industrial Estate",
+  "timestamp": "2026-07-18T10:31:28.191795Z"
+}

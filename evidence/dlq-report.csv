@@ -1,0 +1,8 @@
+window_started_utc,2026-07-18T11:38:36.056798+00:00
+duration_seconds,300
+
+error_type,count,percentage
+NULL_AQI,56,74.67
+IMPOSSIBLE_GPS,11,14.67
+AQI_OUT_OF_RANGE,8,10.67
+TOTAL,75,100.0

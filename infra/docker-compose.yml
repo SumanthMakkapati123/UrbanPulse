@@ -1,0 +1,129 @@
+name: urbanpulse
+
+x-kafka-common: &kafka-common
+  image: apache/kafka:4.1.2
+  restart: unless-stopped
+  environment: &kafka-environment
+    KAFKA_PROCESS_ROLES: broker,controller
+    KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+    KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+    KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093,3@kafka-3:9093
+    KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+    KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+    KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+    KAFKA_MIN_INSYNC_REPLICAS: 2
+    KAFKA_NUM_PARTITIONS: 3
+    KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+    KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 300000
+    KAFKA_LOG_DIRS: /var/lib/kafka/data
+    CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+  healthcheck:
+    test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1"]
+    interval: 10s
+    timeout: 5s
+    retries: 12
+    start_period: 20s
+
+services:
+  kafka-1:
+    <<: *kafka-common
+    hostname: kafka-1
+    container_name: urbanpulse-kafka-1
+    ports:
+      - "127.0.0.1:19092:19092"
+    environment:
+      <<: *kafka-environment
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENERS: INTERNAL://:9092,CONTROLLER://:9093,EXTERNAL://:19092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:9092,EXTERNAL://localhost:19092
+    volumes:
+      - kafka-1-data:/var/lib/kafka/data
+
+  kafka-2:
+    <<: *kafka-common
+    hostname: kafka-2
+    container_name: urbanpulse-kafka-2
+    ports:
+      - "127.0.0.1:19093:19093"
+    environment:
+      <<: *kafka-environment
+      KAFKA_NODE_ID: 2
+      KAFKA_LISTENERS: INTERNAL://:9092,CONTROLLER://:9093,EXTERNAL://:19093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-2:9092,EXTERNAL://localhost:19093
+    volumes:
+      - kafka-2-data:/var/lib/kafka/data
+
+  kafka-3:
+    <<: *kafka-common
+    hostname: kafka-3
+    container_name: urbanpulse-kafka-3
+    ports:
+      - "127.0.0.1:19094:19094"
+    environment:
+      <<: *kafka-environment
+      KAFKA_NODE_ID: 3
+      KAFKA_LISTENERS: INTERNAL://:9092,CONTROLLER://:9093,EXTERNAL://:19094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-3:9092,EXTERNAL://localhost:19094
+    volumes:
+      - kafka-3-data:/var/lib/kafka/data
+
+  flink-checkpoint-init:
+    image: urbanpulse/pyflink:2.1.1
+    profiles: ["processing"]
+    user: root
+    entrypoint: ["/bin/bash", "-c"]
+    command: ["chown -R flink:flink /opt/flink/checkpoints"]
+    volumes:
+      - flink-checkpoints:/opt/flink/checkpoints
+
+  flink-jobmanager:
+    build:
+      context: ../flink
+      dockerfile: Dockerfile
+    image: urbanpulse/pyflink:2.1.1
+    profiles: ["processing"]
+    command: jobmanager
+    ports:
+      - "127.0.0.1:8081:8081"
+    environment:
+      URBANPULSE_PARALLELISM: "1"
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        state.checkpoints.dir: file:///opt/flink/checkpoints
+        execution.checkpointing.interval: 30000
+        execution.checkpointing.mode: EXACTLY_ONCE
+        restart-strategy.type: fixed-delay
+        restart-strategy.fixed-delay.attempts: 3
+        restart-strategy.fixed-delay.delay: 10 s
+    volumes:
+      - ../flink:/opt/flink/jobs:ro
+      - flink-checkpoints:/opt/flink/checkpoints
+    depends_on:
+      kafka-1:
+        condition: service_healthy
+      flink-checkpoint-init:
+        condition: service_completed_successfully
+
+  flink-taskmanager:
+    image: urbanpulse/pyflink:2.1.1
+    profiles: ["processing"]
+    command: taskmanager
+    environment:
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.numberOfTaskSlots: 4
+        state.checkpoints.dir: file:///opt/flink/checkpoints
+    volumes:
+      - ../flink:/opt/flink/jobs:ro
+      - flink-checkpoints:/opt/flink/checkpoints
+    depends_on:
+      - flink-jobmanager
+
+volumes:
+  kafka-1-data:
+  kafka-2-data:
+  kafka-3-data:
+  flink-checkpoints:

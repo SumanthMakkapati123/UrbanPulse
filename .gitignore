@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.log
+*.jar
+target/
+checkpoints/
+output/
+evidence/raw/
+report/rendered*/
+report/a11y-report*.json
+UrbanPulse_Submission*.zip
+report/

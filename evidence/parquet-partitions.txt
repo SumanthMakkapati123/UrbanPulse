@@ -1,0 +1,53 @@
+Captured: 2026-07-18
+Sink: output/ward_energy
+Parquet data files: 48
+Ward/date partitions: 48
+
+output/ward_energy/ward_id=WARD-01/date=2026-07-18
+output/ward_energy/ward_id=WARD-02/date=2026-07-18
+output/ward_energy/ward_id=WARD-03/date=2026-07-18
+output/ward_energy/ward_id=WARD-04/date=2026-07-18
+output/ward_energy/ward_id=WARD-05/date=2026-07-18
+output/ward_energy/ward_id=WARD-06/date=2026-07-18
+output/ward_energy/ward_id=WARD-07/date=2026-07-18
+output/ward_energy/ward_id=WARD-08/date=2026-07-18
+output/ward_energy/ward_id=WARD-09/date=2026-07-18
+output/ward_energy/ward_id=WARD-10/date=2026-07-18
+output/ward_energy/ward_id=WARD-11/date=2026-07-18
+output/ward_energy/ward_id=WARD-12/date=2026-07-18
+output/ward_energy/ward_id=WARD-13/date=2026-07-18
+output/ward_energy/ward_id=WARD-14/date=2026-07-18
+output/ward_energy/ward_id=WARD-15/date=2026-07-18
+output/ward_energy/ward_id=WARD-16/date=2026-07-18
+output/ward_energy/ward_id=WARD-17/date=2026-07-18
+output/ward_energy/ward_id=WARD-18/date=2026-07-18
+output/ward_energy/ward_id=WARD-19/date=2026-07-18
+output/ward_energy/ward_id=WARD-20/date=2026-07-18
+output/ward_energy/ward_id=WARD-21/date=2026-07-18
+output/ward_energy/ward_id=WARD-22/date=2026-07-18
+output/ward_energy/ward_id=WARD-23/date=2026-07-18
+output/ward_energy/ward_id=WARD-24/date=2026-07-18
+output/ward_energy/ward_id=WARD-25/date=2026-07-18
+output/ward_energy/ward_id=WARD-26/date=2026-07-18
+output/ward_energy/ward_id=WARD-27/date=2026-07-18
+output/ward_energy/ward_id=WARD-28/date=2026-07-18
+output/ward_energy/ward_id=WARD-29/date=2026-07-18
+output/ward_energy/ward_id=WARD-30/date=2026-07-18
+output/ward_energy/ward_id=WARD-31/date=2026-07-18
+output/ward_energy/ward_id=WARD-32/date=2026-07-18
+output/ward_energy/ward_id=WARD-33/date=2026-07-18
+output/ward_energy/ward_id=WARD-34/date=2026-07-18
+output/ward_energy/ward_id=WARD-35/date=2026-07-18
+output/ward_energy/ward_id=WARD-36/date=2026-07-18
+output/ward_energy/ward_id=WARD-37/date=2026-07-18
+output/ward_energy/ward_id=WARD-38/date=2026-07-18
+output/ward_energy/ward_id=WARD-39/date=2026-07-18
+output/ward_energy/ward_id=WARD-40/date=2026-07-18
+output/ward_energy/ward_id=WARD-41/date=2026-07-18
+output/ward_energy/ward_id=WARD-42/date=2026-07-18
+output/ward_energy/ward_id=WARD-43/date=2026-07-18
+output/ward_energy/ward_id=WARD-44/date=2026-07-18
+output/ward_energy/ward_id=WARD-45/date=2026-07-18
+output/ward_energy/ward_id=WARD-46/date=2026-07-18
+output/ward_energy/ward_id=WARD-47/date=2026-07-18
+output/ward_energy/ward_id=WARD-48/date=2026-07-18

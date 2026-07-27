@@ -1,0 +1,5 @@
+confluent-kafka==2.12.2
+pytest==8.4.2
+
+# PyFlink and PySpark run in their pinned Docker images. Installing both in the
+# host environment is optional and deliberately omitted from this lightweight venv.

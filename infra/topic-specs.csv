@@ -1,0 +1,12 @@
+topic,partitions,replication_factor,retention_ms,cleanup_policy,purpose
+urbanpulse.bus_gps,12,3,86400000,delete,24-hour accident replay at the highest input rate
+urbanpulse.traffic_signals,6,3,604800000,delete,7-day incident analysis and consumer-lag demonstration
+urbanpulse.air_quality,3,3,7776000000,delete,90-day pollution trend analysis
+urbanpulse.smart_meters,12,3,31536000000,delete,365-day regulatory energy audit
+urbanpulse.route_schedule,3,3,-1,compact,latest schedule per route for KTable enrichment
+urbanpulse.bus_gps_enriched,12,3,86400000,delete,24-hour ETA investigation and replay
+urbanpulse.incidents,6,3,2592000000,delete,30-day operational incident retention
+urbanpulse.ward_energy_summary,6,3,31536000000,delete,365-day councillor and regulatory summaries
+urbanpulse.health_advisories,3,3,7776000000,delete,90-day health advisory history
+urbanpulse.dlq,6,3,7776000000,delete,90-day validation audit and remediation
+
