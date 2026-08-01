@@ -75,6 +75,7 @@ If macOS removes executable bits after copying the folder outside Git, restore t
 | Static verification | `./scripts/verify-static.sh` | `.\scripts\verify-static.ps1` |
 | Create Kafka topics | `./infra/create-topics.sh` | `.\infra\create-topics.ps1` |
 | Verify Kafka cluster | `./infra/verify-cluster.sh` | `.\infra\verify-cluster.ps1` |
+| Interactive demo runner | `./scripts/demo-runner.sh` | `.\scripts\demo-runner.ps1` |
 | Priority demonstration | `./scripts/run-priority-demo.sh` | `.\scripts\run-priority-demo.ps1` |
 | Capture lag only | `./scripts/capture-consumer-lag.sh 120` | `.\scripts\capture-consumer-lag.ps1 -DurationSeconds 120` |
 | Start PyFlink job | `./scripts/run-flink-incidents.sh` | `.\scripts\run-flink-incidents.ps1` |
